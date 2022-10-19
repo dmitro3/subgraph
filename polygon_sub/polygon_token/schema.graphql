@@ -1,0 +1,13 @@
+type transfer @entity{
+  id: ID!
+  from:Bytes
+  to:Bytes
+  value:BigInt
+}
+
+type approval @entity{
+  id: ID!
+  owner:Bytes
+  spender:Bytes
+  value:BigInt
+}

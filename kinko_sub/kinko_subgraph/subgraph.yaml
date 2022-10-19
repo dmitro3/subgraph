@@ -1,0 +1,49 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: kinko
+    network: chapel
+    source:
+      address: "0x755C3EE5cA6CB3EE7A33755Bf32f33088A1991fd"
+      startBlock: 	23639325
+      abi: kinko
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - InitiateCharity
+      abis:
+        - name: kinko
+          file: ./abis/kinko.json
+      eventHandlers:
+        - event: InitiateCharity(address,address,address)
+          handler: handleInitiateCharity
+      file: ./src/kinko.ts
+templates:
+  - name: charity
+    kind: ethereum/contract
+    network: chapel
+    source:
+      abi: temom
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./src/mappings.ts
+      entities:
+        - CharityCreated
+        - Claimed
+        - Donated
+      abis:
+        - name: temom
+          file: ./abis/temom.json
+      eventHandlers:
+        - event: CharityCreated(indexed uint256,indexed uint256,indexed uint256,uint256,uint256)
+          handler: handleCharityCreated
+        - event: Claimed(indexed uint256,indexed address,indexed uint256,uint256,uint256)
+          handler: handleClaimed
+        - event: Donated(indexed uint256,indexed address,indexed uint256,uint256)
+          handler: handleDonated      

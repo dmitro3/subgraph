@@ -1,0 +1,32 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Contract
+    network: goerli
+    source:
+      address: "0xf03eb9802fb3e4F5c55faA949810d8E0b670AC67"
+      abi: Contract
+      startBlock: 7508029
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Initialized
+        - OwnershipTransferred
+        - flatSale
+        - lazy_Auction
+        - lazy_Auction_duration
+      abis:
+        - name: Contract
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: flatSale(uint256,address,uint256,address,uint256)
+          handler: handleflatSale
+        - event: lazy_Auction(uint256,address,uint256,address,address)
+          handler: handlelazy_Auction
+        - event: lazy_Auction_duration(uint256,uint256)
+          handler: handlelazy_Auction_duration
+      file: ./src/contract.ts

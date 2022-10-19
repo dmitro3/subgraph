@@ -1,0 +1,39 @@
+type Initiate_Charity @entity{
+  id: ID!
+  charityAddress:Bytes
+  _sourceToken:Bytes
+  _rewardToken: Bytes
+}
+
+type Charity_Created @entity{
+  id: ID!
+  charityIndex:BigInt
+  startingTime:BigInt
+  charityReward:BigInt
+  endingTime:BigInt
+  distributionTime:BigInt
+}
+
+type Charity_Claimed @entity{
+  id: ID!
+  charityIndex:BigInt
+  doner:Bytes
+  time:BigInt
+  donationAmount:BigInt
+  reward:BigInt
+}
+
+type Charity_Donated @entity{
+  id: ID!
+  charityIndex:BigInt
+  doner:Bytes
+  time:BigInt
+  amount:BigInt
+}
+
+type Charity_Initiated @entity{
+  id: ID!
+  sourceToken:Bytes
+  rewardToken:Bytes
+  owner:Bytes 
+}

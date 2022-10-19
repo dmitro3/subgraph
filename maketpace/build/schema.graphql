@@ -1,0 +1,23 @@
+
+type  Flatsale @entity{
+  id: ID!
+  nonce: BigInt
+  tokenId:BigInt
+  seller:Bytes
+  assetAddress:Bytes
+  amount:BigInt
+}
+type Lazy_auction @entity{
+  id: ID!
+  tokenId: BigInt
+  assetAddress:Bytes
+  amount: BigInt
+  winner: Bytes
+  seller: Bytes
+}
+
+type Lazy_Auction_duration @entity {
+  id: ID!
+  startTime: BigInt
+  endTime: BigInt
+}
